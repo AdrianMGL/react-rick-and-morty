@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
-const ResidentItemEpisode = ({ epi }) => {
+const ResidentItemEpisode = ({ episode }) => {
   const [residentItemEpisode, setResidentItemEpisode] = useState([]);
 
   useEffect(() => {
-    axios.get(epi).then((res) => setResidentItemEpisode(res.data));
-  }, [epi]);
+    axios.get(episode).then((res) => setResidentItemEpisode(res.data));
+  }, [episode]);
 
-  console.log(residentItemEpisode);
+  // console.log(residentItemEpisode);
 
   return (
     <>

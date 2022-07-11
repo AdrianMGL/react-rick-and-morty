@@ -1,8 +1,3 @@
-body {
-  /*@import url("https://fonts.googleapis.com/css2?family=PT+Sans+Narrow:wght@400;700&display=swap");*/
-  background-color: hsla(192, 93%, 24%, 0.99);
-}
-
 * {
   box-sizing: border-box;
 }
@@ -22,11 +17,13 @@ p,
 button,
 img,
 figure,
-input,form {
+input,
+form {
   margin: 0;
   padding: 0;
 }
 
 body {
   font-family: "Neucha", cursive;
+  background-color: hsla(192, 87%, 21%, 0.9);
 }

@@ -1,0 +1,48 @@
+.lds-ring {
+  display: flex;
+  align-items: center;
+  min-height: 15vh;
+  height: 4rem;
+  text-align: center;
+  justify-content: center;
+  margin-inline: auto;
+  overflow: hidden;
+}
+
+.lds-ring div {
+  display: inline-block;
+  height: 4rem;
+  width: 1.5rem;
+  position: relative;
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 0px 20px;
+  margin: 2rem 0.95rem 0.95rem;
+  animation: 0.75s cubic-bezier(0.455, 0.03, 0.515, 0.955) 0s infinite alternate
+    none running bouncer;
+  border-radius: 1rem;
+}
+
+.lds-ring div:nth-child(5n + 1) {
+  background-color: greenyellow;
+}
+.lds-ring div:nth-child(5n + 2) {
+  animation-delay: calc(0.1s);
+  background-color: greenyellow;
+}
+.lds-ring div:nth-child(5n + 3) {
+  animation-delay: calc(0.2s);
+  background-color: greenyellow;
+}
+.lds-ring div:nth-child(5n + 4) {
+  animation-delay: calc(0.2s);
+  background-color: greenyellow;
+}
+.lds-ring div:nth-child(5n + 5) {
+  animation-delay: calc(0.4s);
+  background-color: greenyellow;
+}
+
+@keyframes bouncer {
+  100% {
+    transform: scale(1.75) translateY(-20px);
+  }
+}

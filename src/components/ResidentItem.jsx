@@ -9,10 +9,16 @@ const ResidentItem = ({ resident }) => {
     axios.get(resident).then((res) => setResidentItem(res.data));
   }, [resident]);
 
-  console.log(residentItem);
+  //  console.log(residentItem);
 
   return (
     <div className="resident__date-item">
+      <div className="image">
+        <figure className="card__image">
+          <img src={residentItem.image} alt={residentItem.name} />
+        </figure>
+      </div>
+
       <div className="wrapper__resident">
         <figure className="resident__image">
           <img src={residentItem.image} alt={residentItem.name} />
@@ -21,7 +27,6 @@ const ResidentItem = ({ resident }) => {
           <h5 className="resident__name-item">{residentItem.name}</h5>
         </div>
         <div className="date__basic">
-          {/* <h6>Id: {residentItem.id}</h6> */}
           <h6>
             Origin:{" "}
             <span className="resident__origin-name">
@@ -30,8 +35,8 @@ const ResidentItem = ({ resident }) => {
           </h6>
           <ul className="resident__episode">
             <h6> Episodes where appear: </h6>
-            {residentItem.episode?.map((epi) => (
-              <ResidentItemEpisode epi={epi} key={epi} />
+            {residentItem.episode?.map((episode) => (
+              <ResidentItemEpisode episode={episode} key={episode} />
             ))}
           </ul>
           <h6>
@@ -42,7 +47,8 @@ const ResidentItem = ({ resident }) => {
             <span className={residentItem.status}> </span>
           </h6>
           <h6>
-            Specie: <span className="resident__species">{residentItem.species}</span>
+            Specie:{" "}
+            <span className="resident__species">{residentItem.species}</span>
           </h6>
           <h6>
             Gender: <span>{residentItem.gender}</span>

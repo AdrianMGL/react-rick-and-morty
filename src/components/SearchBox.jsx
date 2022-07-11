@@ -2,9 +2,11 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import "/src/assets/styles/SearchBox.css";
 import ResidentItem from "./ResidentItem";
-import contImage from "/src/assets/images/bg-desktop.gif";
+import contImage from "/src/assets/images/bg.gif";
+import cardImage from "/src/assets/images/bg-header.png";
+import Spinner from "./spinner/Spinner";
 
-function SearchBox() {
+const SearchBox = () => {
   const [location, setLocation] = useState({});
   const [searchValue, setSearchValue] = useState("");
   const [loading, setLoading] = useState(true);
@@ -24,47 +26,59 @@ function SearchBox() {
     setLoading(false);
   };
 
-  //console.log(location);
+  // console.log(location);
 
   return (
-    <div className="container">
-      <figure className="container__image">
-        <img src={contImage} alt="" />
-      </figure>
-      <div className="serie__name">
-        <h2>Rick and Morty</h2>
+    <>
+      <div className="container">
+        <figure className="container__image-header">
+          <img src={cardImage} alt="" />
+        </figure>
+        <figure className="container__image">
+          <img src={contImage} alt="" />
+        </figure>
+        {loading ? (
+          <Spinner />
+        ) : (
+          <>
+            <div className="serie__name">
+              <h2>Rick and Morty</h2>
+            </div>
+            <div className="form">
+              <input
+                type="text"
+                value={searchValue}
+                onChange={(e) => setSearchValue(e.target.value)}
+                placeholder="Search location by id (0-126)"
+              />
+              <button onClick={searchType}>Search</button>
+            </div>
+            <h1 className="location__name">{location.name}</h1>
+            <div className="location__dates">
+              <div className="location__dates-item">
+                <h4>
+                  Type: <span>{location.type}</span>
+                </h4>
+                <h4>
+                  Dimension: <span>{location.dimension}</span>
+                </h4>
+                <h4>
+                  Population: <span>{location.residents?.length}</span>
+                </h4>
+              </div>
+            </div>
+            <div className="residents">
+              <ul className="residents__dates">
+                {location.residents?.map((resident) => (
+                  <ResidentItem resident={resident} key={resident} />
+                ))}
+              </ul>
+            </div>
+          </>
+        )}
       </div>
-      <div className="form">
-        <input
-          type="text"
-          value={searchValue}
-          onChange={(e) => setSearchValue(e.target.value)}
-        />
-        <button onClick={searchType}>Search</button>
-      </div>
-      <h1 className="location__name">{location.name}</h1>
-      <div className="location__dates">
-        <div className="location__dates-item">
-          <h4>
-            Type: <span>{location.type}</span>
-          </h4>
-          <h4>
-            Dimension: <span>{location.dimension}</span>
-          </h4>
-          <h4>
-            Population: <span>{location.residents?.length}</span>
-          </h4>
-        </div>
-      </div>
-      <div className="residents">
-        <ul className="residents__dates">
-          {location.residents?.map((resident) => (
-            <ResidentItem resident={resident} key={resident} />
-          ))}
-        </ul>
-      </div>
-    </div>
+    </>
   );
-}
+};
 
 export default SearchBox;
