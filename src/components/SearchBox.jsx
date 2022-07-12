@@ -5,11 +5,14 @@ import ResidentItem from "./ResidentItem";
 import contImage from "/src/assets/images/bg.gif";
 import cardImage from "/src/assets/images/bg-header.png";
 import Spinner from "./spinner/Spinner";
+import Pagination from "./Pagination";
 
 const SearchBox = () => {
   const [location, setLocation] = useState({});
   const [searchValue, setSearchValue] = useState("");
   const [loading, setLoading] = useState(true);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postsPerPage, setPostsPerPage] = useState(20);
 
   useEffect(() => {
     const random = Math.floor(Math.random() * 126) + 1;
@@ -26,7 +29,18 @@ const SearchBox = () => {
     setLoading(false);
   };
 
-  // console.log(location);
+  //console.log(location);
+
+  /** Current Pages */
+  const indexOfLastPage = currentPage * postsPerPage;
+  const indexOfFisrtPost = indexOfLastPage - postsPerPage;
+  const currentPosts = location.residents?.slice(
+    indexOfFisrtPost,
+    indexOfLastPage
+  );
+
+  /** Change Page */
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
     <>
@@ -69,10 +83,16 @@ const SearchBox = () => {
             </div>
             <div className="residents">
               <ul className="residents__dates">
-                {location.residents?.map((resident) => (
+                {currentPosts?.map((resident) => (
                   <ResidentItem resident={resident} key={resident} />
                 ))}
               </ul>
+              {/*  */}
+              <Pagination
+                postsPerPage={postsPerPage}
+                totalPosts={location.residents?.length}
+                paginate={paginate}
+              />
             </div>
           </>
         )}
