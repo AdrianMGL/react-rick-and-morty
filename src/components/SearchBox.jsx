@@ -13,6 +13,7 @@ const SearchBox = () => {
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage, setPostsPerPage] = useState(20);
+  const [locationSuggestions, setLocationSuggestions] = useState([]);
 
   useEffect(() => {
     const random = Math.floor(Math.random() * 126) + 1;
@@ -22,14 +23,27 @@ const SearchBox = () => {
     setLoading(false);
   }, []);
 
-  const searchType = () => {
-    axios
-      .get(`https://rickandmortyapi.com/api/location/${searchValue}/`)
-      .then((res) => setLocation(res.data));
+  const searchType = (location) => {
+    setLocation(location);
     setLoading(false);
+    reset();
   };
 
   //console.log(location);
+
+  /** */
+  useEffect(() => {
+    if (searchValue !== "") {
+      axios
+        .get(`https://rickandmortyapi.com/api/location/?name=${searchValue}`)
+        .then((res) => setLocationSuggestions(res.data.results))
+        .then((error) => console.log(error));
+    } else {
+      setLocationSuggestions([]);
+    }
+  }, [searchValue]);
+
+  //console.log(locationSuggestions)
 
   /** Current Pages */
   const indexOfLastPage = currentPage * postsPerPage;
@@ -38,6 +52,11 @@ const SearchBox = () => {
     indexOfFisrtPost,
     indexOfLastPage
   );
+
+  /** */
+  const reset = () => {
+    setSearchValue("");
+  };
 
   /** Change Page */
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
@@ -63,9 +82,18 @@ const SearchBox = () => {
                 type="text"
                 value={searchValue}
                 onChange={(e) => setSearchValue(e.target.value)}
-                placeholder="Search location by id (0-126)"
+                placeholder="Search location"
               />
-              <button onClick={searchType}>Search</button>
+              {locationSuggestions.map((suggestion) => (
+                <div
+                  key={suggestion.name}
+                  className="suggestions"
+                  onClick={() => searchType(suggestion)}
+                >
+                  <span className="suggestions-item">{suggestion.name}</span>
+                </div>
+              ))}
+              {/* <button onClick={() => searchType(suggestion)} type='button' >Search</button> */}
             </div>
             <h1 className="location__name">{location.name}</h1>
             <div className="location__dates">

@@ -54,15 +54,21 @@
 }
 
 .form {
+  /* background-color: palevioletred; */
   padding: 0.2rem;
   margin: 0.2rem;
+  /* max-width: 50%; */
+  display: flex;
   text-align: center;
+  flex-direction: column;
+  justify-content: center;
+  /* flex-wrap: wrap; */
 }
 
 .form input {
   padding: 0.5rem 1rem;
   margin-inline: 0.5rem;
-  min-width: 90%;
+  width: 40%;
   border-radius: 1rem;
   border: 1px solid transparent;
 }
@@ -76,7 +82,7 @@
 .form button {
   color: hsl(192, 58%, 50%);
   margin: 1rem;
-  width: 90%;
+  width: 10%;
   padding: 0.4rem 1rem;
   border-radius: 1rem;
   border: 1px solid hsl(192, 58%, 50%);
@@ -90,6 +96,34 @@
   background-color: hsl(192, 58%, 50%);
   color: white;
   box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.15);
+}
+
+.suggestions {
+  /* background-color: mediumorchid; */
+  display: flex;
+  color: rgb(189, 189, 189);
+  width: 30%;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+
+  /* flex-direction:column; */
+}
+
+.suggestions-item {
+  /* background-color: red; */
+  cursor: pointer;
+  margin: 0.095rem;
+  border-radius: 1rem;
+  padding: 0.095rem 0.5rem;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.suggestions-item:hover {
+  color: rgb(255, 255, 255);
+  box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.25);
+  background-color: hsl(192, 45%, 56%);
 }
 
 .location__name {
@@ -169,6 +203,7 @@
   padding: 1rem;
   margin: 0.75rem;
   letter-spacing: 0.05rem;
+  text-align: left;
 }
 
 .date__basic :is(.resident__origin-name, .resident__species) {
@@ -222,6 +257,7 @@
     max-width: 35rem;
     margin-inline: auto;
     padding: 0 1rem;
+    text-align: center;
   }
 
   .residents {
@@ -271,7 +307,7 @@
 
   .form input {
     padding: 1.05rem;
-    min-width: 70%;
+    width: 40%;
     height: 1.5rem;
   }
 
@@ -364,7 +400,8 @@
 @media (min-width: 1200px) {
   .form {
     margin-inline: auto;
-    max-width: 70%;
+    max-width: 80%;
+    /* text-align: center; */
   }
 
   .location__dates-item {
